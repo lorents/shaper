@@ -3,7 +3,7 @@ Shaper
 
 Toy 2D/3D shape processing library for Uno
 
-Buzzwords (features)
+Buzzwords
 ---------
 
 - Use logic operators to create complex 2D shapes out of primitives
