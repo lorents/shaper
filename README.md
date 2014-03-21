@@ -7,9 +7,10 @@ Buzzwords
 ---------
 
 - Use logic operators to create complex 2D shapes out of primitives
-- Fill any shape with color, texture, another shape, or even a totally custom shader
+- Fill any shape with color, texture, or even a totally custom shader
 - Animate shapes with a functional reactive approach
-- A nomadic API makes programming a breeze, while still maintaining an immutable object graph  
+- A nomadic API makes programming a breeze, while still maintaining an immutable object graph
+- Constructing shapes using the Node editor will also be possible (when constructor arguments is supported)
 
 Example
 -------
@@ -28,6 +29,13 @@ _fullShape = outline.Union(circle.Intersect(animatedInnerCircle)).Fill(color);
 ...
 _fullShape.Draw();
 ```
+
+Roadmap
+-------
+
+Currently nothing is implemented :)
+
+The plan is to first implement a simple subset of the final API with only circles as primitives, and later add support for general vector shapes and more operations. Constructing shapes from text should also be possible at some point in the future, and extruding shapes into 3D solids would be a cool feature.
 
 Licence
 -------
