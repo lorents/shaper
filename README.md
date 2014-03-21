@@ -13,15 +13,16 @@ Buzzwords
 
 Example
 -------
+```csharp
+var circle = new Circle(Radius: 50);
+var innerCircle = new Circle(Radius: circle, CalcPosition: s => _time)
+var outline = circle.Outline(Radius: 5);
 
-    var circle = new Circle(Radius: 50);
-    var innerCircle = new Circle(Radius: circle, CalcPosition: s => _time)
-    var outline = circle.Outline(Radius: 5);
-    
-    _fullShape = outline.Fill(color) + circle.Fill(innerCircle.Fill(color));
-    
-    ...
-    _fullShape.Draw();
+_fullShape = outline.Fill(color) + circle.Fill(innerCircle.Fill(color));
+
+...
+_fullShape.Draw();
+```
 
 Licence
 -------
