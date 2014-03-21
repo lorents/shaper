@@ -1,0 +1,17 @@
+{
+  "Name": "Shaper v0",
+  "Description": "",
+  "Publisher": "Lorents Odin Gravås",
+  "Copyright": "Copyright � Lorents Odin Gravås 2014",
+  "Version": "0.1.0.0",
+  "References": [
+	["Uno.Geometry"],
+    ["Uno.Styling"],
+    ["Uno.Designer"],
+    ["Uno.Content.Utilities"],
+  ],
+  "Extensions" : [
+  ],
+  "SourceFiles": [
+  ]
+}
