@@ -10,7 +10,7 @@ Buzzwords
 - Fill any shape with color, texture, or even a totally custom shader
 - Animate shapes with a functional reactive approach
 - A nomadic API makes programming a breeze, while still maintaining an immutable object graph
-- Constructing shapes using the Node editor will also be possible (when constructor arguments is supported)
+- Constructing shapes using the Node editor will also be possible (when providing constructor arguments in ux files is supported)
 
 Example
 -------
