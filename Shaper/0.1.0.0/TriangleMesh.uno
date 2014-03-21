@@ -6,7 +6,7 @@ namespace Shaper
 	{
 		public void Draw()
 		{
-			
+
 		}
 	}
 }

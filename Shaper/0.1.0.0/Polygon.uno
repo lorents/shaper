@@ -1,4 +1,4 @@
-
+using Uno.Collections;
 
 namespace Shaper
 {
@@ -6,7 +6,7 @@ namespace Shaper
 	{
 		public IEnumerable<ConvexPolygon> ToConvexPolygons()
 		{
-			return new ConvexPolygons[];
+			return new List<ConvexPolygon>();
 		}
 	}
 }

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project>
+  <References>
+    <PackageReference Name="Uno.Content.Utilities" />
+    <PackageReference Name="Uno.Scenes" />
+  </References>
+  <Files>
+    <SourceFile Path="Operators/Intersect.uno" />
+    <SourceFile Path="Operators/Inverse.uno" />
+    <SourceFile Path="Operators/Union.uno" />
+    <SourceFile Path="Shapes/Arc.uno" />
+    <SourceFile Path="Shapes/Circle.uno" />
+    <SourceFile Path="App.uno" />
+    <SourceFile Path="ConvexPolygon.uno" />
+    <SourceFile Path="Polygon.uno" />
+    <SourceFile Path="Shape.uno" />
+    <SourceFile Path="TriangleMesh.uno" />
+  </Files>
+</Project>
