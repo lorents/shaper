@@ -18,6 +18,7 @@ var circle = new Circle(Radius: 50);
 var innerCircle = new Circle(Radius: circle, CalcPosition: s => _time)
 var outline = circle.Outline(Radius: 5);
 
+var color = float4(1,0.2f,0,1);
 _fullShape = outline.Fill(color) + circle.Fill(innerCircle.Fill(color));
 
 ...
