@@ -15,7 +15,7 @@ Example
 -------
 ```csharp
 var circle = new Circle(Radius: 50);
-var innerCircle = new Circle(Radius: 50, CalcPosition: s => _time)
+var innerCircle = circle.Clone(CalcPosition: s => _time);
 var outline = circle.Outline(Radius: 5);
 
 var color = float4(1,0.2f,0,1);
