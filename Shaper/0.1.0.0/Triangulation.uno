@@ -18,21 +18,21 @@ class Triangulate
 		// we want a counter-clockwise polygon in V (create indirection table used to pop of done vertices)
 		var V = new List<ushort>();
 		if (Area(contour) > 0)
-			for (ushort v=0; v<n; v++) 
+			for (ushort v=0; v<n; v++)
 				V.Add(v);
 		else
-			for (ushort v=0; v<n; v++) 
+			for (ushort v=0; v<n; v++)
 				V.Add((ushort)((n-1)-v));
-		
+
 		// remove nv-2 Vertices, creating 1 triangle every time
 		int count = 2*V.Count; // error detection
-		
+
 		for (int m = 0, v = V.Count-1; V.Count > 2; )
 		{
 			// if we loop, it is probably a non-simple polygon
 			if ((count--) <= 0)
 				throw new Exception("ERROR - probable bad polygon!");
-		
+
 			// three consecutive vertices in current polygon, <u,v,w>
 			int u = v; // previous
 			if (u >= V.Count) u = 0;
@@ -88,16 +88,16 @@ class Triangulate
 		for (var p=0; p<n; p++)
 		{
 			if ((p == u) || (p == v) || (p == w))
-				continue; 
+				continue;
 
 			var P = contour[V[p]];
 			if (InsideTriangle(A.X, A.Y, B.X, B.Y, C.X, C.Y, P.X, P.Y))
-				return false; 
+				return false;
 		}
 
 		return true;
 	}
-	
+
 	public static bool InsideTriangle(float AX, float AY, float BX, float BY, float CX, float CY, float PX, float PY)
 	{
 		var ax = CX - BX; var ay = CY - BY;
