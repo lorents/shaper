@@ -16,7 +16,7 @@ Example
 -------
 ```csharp
 var circle = new Circle(Radius: 50);
-var animatedInnerCircle = circle.Animate(Position: s => Tan(_time));
+var animatedInnerCircle = circle.Animate(Position: s => circle.Position + float2(0, Tan(_time)));
 var outline = circle.Outline(Radius: 5);
 
 var color = float4(1, 0.2f, 0, 1);
