@@ -7,6 +7,7 @@
   <Files>
     <SourceFile Path="Operators/Intersect.uno" />
     <SourceFile Path="Operators/Inverse.uno" />
+    <SourceFile Path="Operators/Subtract.uno" />
     <SourceFile Path="Operators/Union.uno" />
     <SourceFile Path="Shapes/Arc.uno" />
     <SourceFile Path="Shapes/Circle.uno" />
@@ -15,5 +16,6 @@
     <SourceFile Path="Polygon.uno" />
     <SourceFile Path="Shape.uno" />
     <SourceFile Path="TriangleMesh.uno" />
+    <SourceFile Path="Triangulation.uno" />
   </Files>
 </Project>

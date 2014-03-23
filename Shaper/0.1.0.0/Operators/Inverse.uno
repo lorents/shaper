@@ -10,10 +10,15 @@ namespace Shaper
 	public class Inverse : Shape
 	{
 		public Shape Of { get; private set; }
-		
+
 		public Inverse(Shape Of)
 		{
 			this.Of = Of;
 		}
+		
+		internal override void Draw(DrawContext dc)
+		{
+		}
+
 	}
 }

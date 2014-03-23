@@ -7,20 +7,20 @@ using Uno.Content.Models;
 
 namespace Shaper
 {
-	public class Intersect : Shape
+	public class Subtract : Shape
 	{
 		public Shape Left { get; private set; }
 		public Shape Right { get; private set; }
 
-		public Intersect(Shape Left, Shape Right)
+		public Subtract(Shape Left, Shape Right)
 		{
 			this.Left = Left;
 			this.Right = Right;
 		}
-
+		
 		internal override void Draw(DrawContext dc)
 		{
-
+			Left.Draw(dc);
 		}
 	}
 }

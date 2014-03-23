@@ -16,16 +16,16 @@ namespace Shaper
 		{
 			return new Intersect(this, With);
 		}
-		
+
 		public Shape Inverse()
 		{
 			return new Inverse(this);
 		}
 
-		//public Shape Subtract(Shape From)
-		//{
-		//	throw new NotImplementedException();
-		//}
+		public Shape Subtract(Shape From)
+		{
+			return new Subtract(this, From);
+		}
 
 		// Fill
 
@@ -51,6 +51,22 @@ namespace Shaper
 
 		// Outline
 
+		public Shape Shrink(float Amount)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Shape Expand(float Amount)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Shape Outline(float Radius)
+		{
+			var halfRadius = Radius / 2.0f;
+			return Expand(halfRadius).Subtract(Shrink(halfRadius));
+		}
+
 		//public Shape Outline(float? Inner=null, float? Outer=null, Func<Shape,float> CalcInner=null, Func<Shape,float> CalcOuter=null)
 		//{
 		//	return Clone();
@@ -68,9 +84,17 @@ namespace Shaper
 		//{
 		//	return new List<Polygon>();
 		//}
-		
-		internal virtual void DrawAt(float2 origin, int z) { }
-		
-		public virtual void Draw() { DrawAt(float2(0), 0); }
+
+		internal abstract void Draw(DrawContext dc);
+
+		public virtual void Draw()
+		{
+			Draw(new DrawContext());
+		}
+	}
+
+	class DrawContext
+	{
+
 	}
 }
