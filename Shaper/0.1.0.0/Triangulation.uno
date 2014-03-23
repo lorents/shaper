@@ -6,8 +6,7 @@ using Uno;
 
 class Triangulate
 {
-	// triangulate a contour/polygon, places results in STL vector
-	// as series of triangles
+	// triangulate a contour/polygon, place resulting indices in result
 	public static void Process(List<float2> contour, List<ushort> result)
 	{
 		// allocate and initialize list of Vertices in polygon
