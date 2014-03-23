@@ -14,6 +14,8 @@ Buzzwords
 
 Example
 -------
+
+
 ```csharp
 var circle = new Circle(Radius: 50);
 var animatedInnerCircle = circle.Animate(Position: s => circle.Position + float2(0, Tan(_time)));
@@ -28,6 +30,16 @@ _fullShape = outline.Union(circle.Intersect(animatedInnerCircle)).Fill(color);
 
 ...
 _fullShape.Draw();
+```
+
+Maybe later, extruding shapes to create 3D solids:
+```csharp
+var meshA = _myShape.Extrude(10.0f);
+var meshB = _myShape.Revolve(float2(1,0), float2(0,0));
+
+_mesh = meshA.Subtract(meshB);
+...
+_mesh.Draw(material);
 ```
 
 Roadmap
