@@ -46,10 +46,11 @@ Status
 -------
 
 What we have:
-- Polygonizing bezier splines
-- Triangulating simple polygons without holes
+- Polygonization of bezier splines
+- Triangulation of simple polygons without holes
 
 What we need asap:
+- A polygon editor (for debugging purposes)
 - Remove holes from polygons
 - Handle loops in curves/polygons
 - Boolean operators 
