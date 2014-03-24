@@ -60,7 +60,7 @@ What we need asap:
 What we want:
 - Shrink/Expand/Outline
 - Animation support
-  - Atm the plan is to inject evaluation functions in the object graph, which will take precedence over static values. A coneniency .Animate(...) method will make this easy and readable. I think we should pass time as a parameter to these Func's, so we can easily do stuff such as .Delay()-ing shapes etc (which is important when creating juicy motion graphics!)
+  - Atm the plan is to inject evaluation functions in the object graph, which will take precedence over static values. A conveniency `.Animate(...)` method will make this easy and readable. I think we should pass time as a parameter to these `Func`'s, so we can easily do stuff such as `.Delay()`-ing shapes etc (which is important when creating juicy motion graphics!)
 
 What we want a bit later:
 - Constructing shapes from text
