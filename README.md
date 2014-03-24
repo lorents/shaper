@@ -1,12 +1,12 @@
 Shaper
 ======
 
-Toy 2D/3D shape processing library for Uno
+2D/3D shape processing library for Uno
 
 Buzzwords
 ---------
 
-- Use logic operators to create complex 2D shapes out of primitives
+- Use logic operators to create complex 2D shapes out of primitives (or arbitrary bezier curves)
 - Fill any shape with color, texture, or even a totally custom shader
 - Animate shapes with a functional reactive approach
 - A nomadic API makes programming a breeze, while still maintaining an immutable object graph
@@ -42,14 +42,30 @@ _mesh = meshA.Subtract(meshB);
 _mesh.Draw(material);
 ```
 
-Roadmap
+Status
 -------
 
-Currently nothing is implemented :)
+What we have:
+- Polygonizing bezier splines
+- Triangulating simple polygons without holes
 
-The plan is to first implement a simple subset of the final API with only circles as primitives, and later add support for general vector shapes and more operations. Constructing shapes from text should also be possible at some point in the future, and extruding shapes into 3D solids would be a cool feature.
+What we need asap:
+- Remove holes from polygons
+- Handle loops in curves/polygons
+- Boolean operators 
+  - Note: I think these should operate on bezier splines before polygonizing
+  - Note2: The same code could probably work for solving the loops?
+
+What we want:
+- Shrink/Expand/Outline
+- Animation support
+
+What we want a bit later:
+- Constructing shapes from text
+- Extruding and revolving shapes into 3D solids
+- A similar 3D CSG library to do similar things with the 3D solids :)
 
 Licence
 -------
 
-Something free
+Something free, BSD?
