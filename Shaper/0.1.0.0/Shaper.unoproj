@@ -15,6 +15,7 @@
     <SourceFile Path="ConvexPolygon.uno" />
     <SourceFile Path="Polygon.uno" />
     <SourceFile Path="Shape.uno" />
+    <SourceFile Path="Subdivision.uno" />
     <SourceFile Path="TriangleMesh.uno" />
     <SourceFile Path="Triangulation.uno" />
   </Files>
