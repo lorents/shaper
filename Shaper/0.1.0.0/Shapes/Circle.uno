@@ -41,7 +41,7 @@ namespace Shaper
 			{
 				float2 VertexPosition : vertex_attrib(_vertices, _indices);
 				ClipPosition: float4(pos + VertexPosition * r,0,1);
-				PixelColor: float4(0,1,0,1);
+				PixelColor: float4(1,1,1,1);
 				ClipPosition : float4(((prev.XY / Context.Viewport.Size) * 2 - 1) * float2(1,-1), -1, 1);
 				CullFace : PolygonFace.None;
 			};
@@ -76,9 +76,8 @@ namespace Shaper
 			);
 
 			var _vertices = ToArray(polygon);
-			var _indices = ToArray(PolygonTriangulation.CreateTriangles(polygon));
 
-			draw
+				draw
 			{
 				PrimitiveType : PrimitiveType.LineStrip;
 				PointSize:2.0f;
@@ -88,17 +87,22 @@ namespace Shaper
 				ClipPosition : float4(((prev.XY / Context.Viewport.Size) * 2 - 1) * float2(1,-1), -1, 1);
 				CullFace : PolygonFace.None;
 			};
-
-
-			draw
-			{
-				float2 VertexPosition : vertex_attrib(_vertices, _indices);
-				ClipPosition: float4(VertexPosition + float2(200),0,1);
-				PixelColor: float4(0,0,0.2f,1);
-				ClipPosition : float4(((prev.XY / Context.Viewport.Size) * 2 - 1) * float2(1,-1), -1, 1);
-				CullFace : PolygonFace.None;
-			};
 			
+			try
+			{
+				var _indices = ToArray(PolygonTriangulation.CreateTriangles(polygon));
+				draw
+				{
+					float2 VertexPosition : vertex_attrib(_vertices, _indices);
+					ClipPosition: float4(VertexPosition + float2(200),0,1);
+					PixelColor: float4(0,0,0.2f,1);
+					ClipPosition : float4(((prev.XY / Context.Viewport.Size) * 2 - 1) * float2(1,-1), -1, 1);
+					CullFace : PolygonFace.None;
+				};
+			}
+			catch (Uno.Exception e)
+			{
+			}
 		}
 	}
 }
