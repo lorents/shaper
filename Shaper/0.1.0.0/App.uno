@@ -13,28 +13,27 @@ namespace Shaper
     public class App : Uno.Application
     {
 		public List<ControlPoint> ControlPoints = new List<ControlPoint>();
-		
+
 		public App()
 		{
 			var p = float2(150);
 			var s = float2(1.0f);
 			var r = 100.0f*1.0f;
 			var tr = 100.0f*0.55f;
-			
+
 			ControlPoints.Add(new ControlPoint { Position = p+float2(r,0)*s, TangentLeft = p+float2(r,tr)*s, TangentRight = p+float2(r,-tr)*s });
 			ControlPoints.Add(new ControlPoint { Position = p+float2(0,-r)*s, TangentLeft = p+float2(tr,-r)*s, TangentRight = p+float2(-tr,-r)*s });
 			ControlPoints.Add(new ControlPoint { Position = p+float2(-r,0)*s, TangentLeft = p+float2(-r,-tr)*s, TangentRight = p+float2(-r,tr)*s });
 			ControlPoints.Add(new ControlPoint { Position = p+float2(0,r)*s, TangentLeft = p+float2(-tr,r)*s, TangentRight = p+float2(tr,r)*s });
 			ControlPoints.Add(new ControlPoint { Position = p+float2(r,0)*s, TangentLeft = p+float2(r,tr)*s, TangentRight = p+float2(r,-tr)*s });
-		
+
 			Window.PointerDown += OnPointerDown;
 			Window.PointerMove += OnPointerMove;
 			Window.PointerUp += OnPointerUp;
 		}
-		
+
         public override void Draw()
         {
-
 			//var circle = new Circle(Scale: s, Radius: 100.0f, Position: p)
 			//	.Union(new Circle());
 			//circle.Draw();
@@ -72,8 +71,8 @@ namespace Shaper
 			}
 			DrawGizmos();
 		}
-		
-		
+
+
 		void DrawGizmos()
 		{
 			foreach (var point in ControlPoints)
@@ -85,7 +84,7 @@ namespace Shaper
 				CircleRenderer.Draw(point.TangentRight, 5.0f);
 			}
 		}
-		
+
 		void DrawLine(float2 from, float2 to)
 		{
 			var vertices = new float2[] {from, to};
@@ -100,10 +99,10 @@ namespace Shaper
 				CullFace : PolygonFace.None;
 			};
 		}
-		
-		
+
+
 		State _state = new Idle();
-		
+
 		void OnPointerDown(object sender, Uno.Platform.PointerEventArgs args)
 		{
 			SetState(_state.OnPointerDown(args.Position));
@@ -116,23 +115,23 @@ namespace Shaper
 		{
 			SetState(_state.OnPointerUp(args.Position));
 		}
-		
+
 		void SetState(State newState)
 		{
 			_state = newState;
 			_state.Context = this;
 		}
     }
-	
+
 	class State
 	{
 		public App Context { get; set; }
-		
+
 		public virtual State OnPointerDown(float2 p) { return this; }
 		public virtual State OnPointerMove(float2 p) { return this; }
 		public virtual State OnPointerUp(float2 p) { return this; }
 	}
-	
+
 	class Idle : State
 	{
 		public override State OnPointerDown(float2 p)
@@ -146,19 +145,27 @@ namespace Shaper
 				if (Vector.Length(point.TangentRight - p) < 5.0f)
 					return new MovingRight(point);
 			}
+			/*for (int i = 0; i<Context.ControlPoints.Length-1; i++)
+			{
+				var a = Context.ControlPoints[i];
+				var b = Context.ControlPoints[i+1];
+
+
+
+			}*/
 			return this;
 		}
 	}
-	
+
 	class MovingPoint : State
 	{
 		public ControlPoint _point;
-		
+
 		public MovingPoint(ControlPoint point)
 		{
 			_point = point;
 		}
-		
+
 		public override Shaper.State OnPointerMove(float2 p)
 		{
 			var delta = p - _point.Position;
@@ -167,22 +174,22 @@ namespace Shaper
 			_point.TangentRight += delta;
 			return this;
 		}
-		
+
 		public override State OnPointerUp(float2 p)
 		{
 			return new Idle();
 		}
 	}
-	
+
 	class MovingLeft : State
 	{
 		public ControlPoint _point;
-		
+
 		public MovingLeft(ControlPoint point)
 		{
 			_point = point;
 		}
-		
+
 		public override Shaper.State OnPointerMove(float2 p)
 		{
 			var delta = p - _point.TangentLeft;
@@ -190,22 +197,22 @@ namespace Shaper
 			_point.TangentRight = _point.Position + (_point.Position - _point.TangentLeft);
 			return this;
 		}
-		
+
 		public override State OnPointerUp(float2 p)
 		{
 			return new Idle();
 		}
 	}
-	
+
 	class MovingRight : State
 	{
 		public ControlPoint _point;
-		
+
 		public MovingRight(ControlPoint point)
 		{
 			_point = point;
 		}
-		
+
 		public override Shaper.State OnPointerMove(float2 p)
 		{
 			var delta = p - _point.TangentRight;
@@ -213,7 +220,7 @@ namespace Shaper
 			_point.TangentLeft = _point.Position + (_point.Position - _point.TangentRight);
 			return this;
 		}
-		
+
 		public override State OnPointerUp(float2 p)
 		{
 			return new Idle();
