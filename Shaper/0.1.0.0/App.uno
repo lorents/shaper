@@ -34,10 +34,24 @@ namespace Shaper
 
         public override void Draw()
         {
-			//var circle = new Circle(Scale: s, Radius: 100.0f, Position: p)
-			//	.Union(new Circle());
-			//circle.Draw();
+			var circle = new Circle().Animate(Position : CalcPosition);
 
+			Shape shape = circle;
+			for (int i = 1; i < 10; i++)
+				shape += circle
+					.Translate(float2(i*50,0))
+					.Delay(0.1*i);
+			
+			shape.Draw();
+		}
+
+		float2 CalcPosition(Tweener t)
+		{
+			return float2(0,t.Sin()*200);
+		}
+		
+		/*
+			
 			var polygon = CurveSubdivision.CreatePolygon(ControlPoints.ToArray());
 
 			var _vertices = ToArray(polygon);
@@ -70,8 +84,10 @@ namespace Shaper
 			{
 			}
 			DrawGizmos();
-		}
+		}*/
 
+
+		
 
 		void DrawGizmos()
 		{

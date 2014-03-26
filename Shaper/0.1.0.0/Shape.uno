@@ -3,8 +3,65 @@ using Uno.Collections;
 
 namespace Shaper
 {
+	public class Tweener
+	{
+		readonly double _time;
+		
+		public Tweener(double time) 
+		{ 
+			_time = time; 
+		}
+		
+		public float Sin(float Frequency = 1.0f, float Phase = 0.0f) { return (float)Math.Sin(_time * Frequency + Phase); }
+		public float Cos(float Frequency = 1.0f, float Phase = 0.0f) { return (float)Math.Cos(_time * Frequency + Phase); }
+
+		public float2 EaseIn(float2 From, float2 To, double At=0.0, double Duration=0.2, float Amount = 1.0f) 
+		{
+			return From + (To - From) * (float)Math.Saturate((_time - At) / Duration);
+		}
+		
+		public float2 EaseOut(float2 From, float2 To, double At=0.0, double Duration=0.2, float Amount = 1.0f) 
+		{ 
+			return From + (To - From) * (float)Math.Saturate((_time - At) / Duration);
+		}
+	}
+
+	//.Animate(Position: t => t.EaseIn(float2(10,0), float2(10,10)));
+
 	public abstract class Shape
 	{
+		public float2 Position { get; private set; }
+		public Func<Tweener, float2> EvalPosition { get; private set; }
+		
+		public float2 Scaling { get; private set; }
+		public Func<Tweener, float2> EvalScaling { get; private set; }
+
+		public double TimeOffset { get; private set; }
+		
+		protected Shape(
+			double TimeOffset = 0,
+			float2 Position = float2(0), Func<Tweener, float2> EvalPosition = null,
+			float2 Scale = float2(1), Func<Tweener, float2> EvalScale = null)
+		{
+			this.TimeOffset = TimeOffset;
+			this.Position = Position;
+			this.EvalPosition = EvalPosition;
+			this.Scaling = Scale;
+			this.EvalScaling = EvalScale;
+		}
+		
+		// Animate
+
+		//public Shape Animate(Func<Tweener, float2> Position = null)
+		//{
+		//	EvalPosition = Position;
+		//}
+
+		public virtual Shape Delay(double time)
+		{
+			return this;
+		}
+
 		// Logic operators
 
 		public Shape Union(Shape With)
@@ -12,6 +69,11 @@ namespace Shaper
 			return new Union(this, With);
 		}
 
+		public static Shape operator+ (Shape what, Shape with)
+		{
+			return what.Union(with);
+		}
+		
 		public Shape Intersect(Shape With)
 		{
 			return new Intersect(this, With);
@@ -27,27 +89,22 @@ namespace Shaper
 			return new Subtract(this, From);
 		}
 
-		// Fill
+		// Transform
 
-		//public Shape Fill(Shape Shape)
-		//{
-		//	throw new NotImplementedException();
-		//}
+		public virtual Shape Translate(float2 offset)
+		{
+			return this;
+		}
 
-		//public Shape Fill(Brush Brush)
-		//{
-		//	throw new NotImplementedException();
-		//}
+		public Shape Scale(float2 scale, float2 pivot = float2(0))
+		{
+			return this;
+		}
 
-		//public Shape Fill(texture2D Texture)
-		//{
-		//	throw new NotImplementedException();
-		//}
-
-		//public Shape Fill(float4 Color)
-		//{
-		//	return new Fill(this, Color);
-		//}
+		public Shape Rotate(float degrees, float2 pivot = float2(0))
+		{
+			return this;
+		}
 
 		// Outline
 
@@ -67,16 +124,6 @@ namespace Shaper
 			return Expand(halfRadius).Subtract(Shrink(halfRadius));
 		}
 
-		//public Shape Outline(float? Inner=null, float? Outer=null, Func<Shape,float> CalcInner=null, Func<Shape,float> CalcOuter=null)
-		//{
-		//	return Clone();
-		//}
-
-		//public Shape Outline(float? Radius=null, Func<Shape,float> CalcRadius=null)
-		//{
-		//	return Clone();
-		//}
-
 		// Converting
 
 
@@ -85,12 +132,13 @@ namespace Shaper
 		//	return new List<Polygon>();
 		//}
 
-		internal abstract void Draw(DrawContext dc);
+		internal abstract void Draw(DrawContext dc, double time);
 
 		public virtual void Draw()
 		{
-			Draw(new DrawContext());
+			Draw(new DrawContext(), Uno.Application.Current.FrameTime);
 		}
+
 	}
 
 	class DrawContext

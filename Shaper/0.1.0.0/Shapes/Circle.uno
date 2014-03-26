@@ -2,6 +2,7 @@ using Uno.Scenes;
 using Uno.Graphics;
 using Uno.Math;
 using Uno.Collections.EnumerableExtensions;
+using Uno;
 
 namespace Shaper
 {
@@ -52,21 +53,73 @@ namespace Shaper
 	public class Circle : Shape
 	{
 		public float Radius { get; private set; }
-		public float2 Position { get; private set; }
-		public float2 Scale { get; private set; }
-		public Circle(float2 Scale = float2(1), float Radius = 10.0f, float2 Position = float2(0)/*, Func<Shape, float> CalcRadius = null, Func<Shape, float2> CalcPosition = null*/)
+		public Func<Tweener, float> EvalRadius { get; private set; }
+		
+		public Circle(
+			double TimeOffset = 0,
+			float2 Position = float2(0), Func<Tweener, float2> EvalPosition = null,
+			float2 Scaling = float2(1), Func<Tweener, float2> EvalScaling = null,
+			float Radius = 10.0f, Func<Tweener, float> EvalRadius = null)
+			: base(TimeOffset, Position, EvalPosition, Scaling, EvalScaling)
 		{
 			this.Radius = Radius;
-			this.Position = Position;
-			this.Scale = Scale;
+			this.EvalRadius = EvalRadius;
 		}
 
-		internal override void Draw(DrawContext dc)
+		public Circle Animate(
+			Func<Tweener, float2> Position = null,
+			Func<Tweener, float2> Scaling = null,
+			Func<Tweener, float> Radius = null)
 		{
-			var p = Position;
-			var s = Scale;
-			var r = Radius*1.0f;
-			var tr = Radius*0.55f;
+			return new Circle(
+				this.TimeOffset, 
+				this.Position, Position != null ? Position : this.EvalPosition, 
+				this.Scaling, Scaling != null ? Scaling : this.EvalScaling, 
+				this.Radius, Radius != null ? Radius : this.EvalRadius);
+		}
+		
+		public override Shape Delay(double offset)
+		{
+			return new Circle(
+				offset, 
+				this.Position, this.EvalPosition, 
+				this.Scaling, this.EvalScaling, 
+				this.Radius, this.EvalRadius);
+		}
+		
+		public override Shape Translate(float2 offset)
+		{
+			return new Circle(
+				this.TimeOffset, 
+				this.Position + offset, this.EvalPosition == null ? this.EvalPosition : new Offset(this.EvalPosition, offset).Evaluate, 
+				this.Scaling, this.EvalScaling, 
+				this.Radius, this.EvalRadius);
+		}
+		
+		class Offset 
+		{
+			readonly Func<Tweener, float2> _eval;
+			readonly float2 _offset;
+			
+			public Offset(Func<Tweener, float2> eval, float2 offset)
+			{
+				_eval = eval;
+				_offset = offset;
+			}
+			
+			public float2 Evaluate(Tweener t)
+			{
+				return _eval(t) + _offset;
+			}
+		}
+		
+		internal override void Draw(DrawContext dc, double time)
+		{
+			var tweener = new Tweener(time + TimeOffset);
+			var p = EvalOrUse(EvalPosition, Position, tweener);
+			var s = EvalOrUse(EvalScaling, Scaling, tweener);
+			var r = EvalOrUse(EvalRadius, Radius, tweener);
+			var tr = r * 0.55f;
 			var polygon = CurveSubdivision.CreatePolygon(
 				new ControlPoint { Position = p+float2(r,0)*s, TangentLeft = p+float2(r,tr)*s, TangentRight = p+float2(r,-tr)*s },
 				new ControlPoint { Position = p+float2(0,-r)*s, TangentLeft = p+float2(tr,-r)*s, TangentRight = p+float2(-tr,-r)*s },
@@ -77,7 +130,7 @@ namespace Shaper
 
 			var _vertices = ToArray(polygon);
 
-				draw
+			draw
 			{
 				PrimitiveType : PrimitiveType.LineStrip;
 				PointSize:2.0f;
@@ -87,7 +140,7 @@ namespace Shaper
 				ClipPosition : float4(((prev.XY / Context.Viewport.Size) * 2 - 1) * float2(1,-1), -1, 1);
 				CullFace : PolygonFace.None;
 			};
-			
+
 			try
 			{
 				var _indices = ToArray(PolygonTriangulation.CreateTriangles(polygon));
@@ -104,5 +157,10 @@ namespace Shaper
 			{
 			}
 		}
+		T EvalOrUse<T, Targ>(Func<Targ, T> eval, T constant, Targ arg)
+		{
+			return eval != null ? eval(arg) : constant;
+		}
+		
 	}
 }

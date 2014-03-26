@@ -17,11 +17,11 @@ namespace Shaper
 			this.Left = Left;
 			this.Right = Right;
 		}
-		
-		internal override void Draw(DrawContext dc)
+
+		internal override void Draw(DrawContext dc, double time)
 		{
-			Left.Draw(dc);
-			Right.Draw(dc);
+			Left.Draw(dc, time);
+			Right.Draw(dc, time);
 		}
 
 	}

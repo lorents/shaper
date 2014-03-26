@@ -15,8 +15,8 @@ namespace Shaper
 		{
 			this.Of = Of;
 		}
-		
-		internal override void Draw(DrawContext dc)
+
+		internal override void Draw(DrawContext dc, double time)
 		{
 		}
 
