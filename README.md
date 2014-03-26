@@ -20,7 +20,7 @@ Example
 
 ```csharp
 var circle = new Circle(Radius: 50);
-var animatedInnerCircle = circle.Animate(Position: s => circle.Position + float2(0, Tan(_time)));
+var animatedInnerCircle = circle.Animate(Position: t => float2(0, t.Tan(_time)*100));
 var outline = circle.Outline(Radius: 5);
 
 var color = float4(1, 0.2f, 0, 1);
@@ -32,6 +32,19 @@ _fullShape = outline.Union(circle.Intersect(animatedInnerCircle)).Fill(color);
 
 ...
 _fullShape.Draw();
+```
+
+```csharp
+var circle = new Circle().Animate(Position : t => t.EaseOut(float2(0,0), float2(0,200)));
+
+_shape = circle;
+for (int i = 1; i < 10; i++)
+	shape += circle
+		.Translate(float2(i*50,0))
+		.Delay(0.1*i);
+
+...
+_shape.Draw();
 ```
 
 Maybe later, extruding shapes to create 3D solids:
