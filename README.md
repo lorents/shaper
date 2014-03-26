@@ -3,6 +3,8 @@ Shaper
 
 2D/3D shape processing library for Uno
 
+![A nice screenshot](Screenshot.png)
+
 Buzzwords
 ---------
 
