@@ -39,7 +39,7 @@ var circle = new Circle().Animate(Position : t => t.EaseOut(float2(0,0), float2(
 
 _shape = circle;
 for (int i = 1; i < 10; i++)
-	shape += circle
+	_shape += circle
 		.Translate(float2(i*50,0))
 		.Delay(0.1*i);
 
