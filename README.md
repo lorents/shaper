@@ -25,13 +25,13 @@ var outline = circle.Outline(Radius: 5);
 
 var color = float4(1, 0.2f, 0, 1);
 
-_fullShape = outline.Union(circle.Intersect(animatedInnerCircle)).Fill(color);
+_fullShape = outline.Union(circle.Intersect(animatedInnerCircle));
 
 // maybe even:
-//_fullShape = (outline + circle ^ animatedInnerCircle).Fill(color);
+//_fullShape = (outline + circle ^ animatedInnerCircle);
 
 ...
-_fullShape.Draw();
+_fullShape.Draw(brush);
 ```
 
 ```csharp
@@ -44,7 +44,7 @@ for (int i = 1; i < 10; i++)
 		.Delay(0.1*i);
 
 ...
-_shape.Draw();
+_shape.Draw(brush);
 ```
 
 Maybe later, extruding shapes to create 3D solids:
