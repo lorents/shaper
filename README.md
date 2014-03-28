@@ -57,6 +57,15 @@ _mesh = meshA.Subtract(meshB);
 _mesh.Draw(material);
 ```
 
+What about using the Designer?
+-------
+This is a serious concern; currently the designer and animation tools are designed around mutable objects. I.e. setting- and animating values are now done by overwriting properties. In addition to being a source of bugs and a lot of redundant runtime checks if the objects are in a complete state, it generally does not encurage folliwing good API practices. 
+
+- To preserve the immutable object graph while stil allowing animation, the plan is to inject evaluation functions in the object graph, which will take precedence over static values. A conveniency `.Animate(...)` method will make this easy and readable. I think we should pass time as a parameter to these `Func`'s, so we can easily do stuff such as `.Delay()`-ing shapes etc (which is important when creating juicy motion graphics!).
+- The animation system must then be able generate evaluation functions, not just code that sets properties.
+- To allow modifications of an immutable object graph from the designer, we need a concept of constructor dependency injection. 
+
+
 Status
 -------
 
@@ -75,7 +84,6 @@ What we need asap:
 What we want:
 - Shrink/Expand/Outline
 - Animation support
-  - Atm the plan is to inject evaluation functions in the object graph, which will take precedence over static values. A conveniency `.Animate(...)` method will make this easy and readable. I think we should pass time as a parameter to these `Func`'s, so we can easily do stuff such as `.Delay()`-ing shapes etc (which is important when creating juicy motion graphics!)
 
 What we want a bit later:
 - Constructing shapes from text
