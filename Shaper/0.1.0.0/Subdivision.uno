@@ -10,15 +10,17 @@ namespace Shaper
 {
 	class CurveSubdivision
 	{
-		public static IEnumerable<float2> CreatePolygon(params ControlPoint[] controlPoints)
+		public static IEnumerable<float2> CreatePolygon(IEnumerable<ControlPoint> controlPoints)
 		{
 			return new CurveSubdivision().Subdivide(controlPoints);
 		}
 
 		readonly List<float2> _result = new List<float2>();
 
-		IEnumerable<float2> Subdivide(ControlPoint[] controlPoints)
+		IEnumerable<float2> Subdivide(IEnumerable<ControlPoint> controlPointsn)
 		{
+			var controlPoints = EnumerableExtensions.ToArray(controlPointsn);
+
  			for (int i =0; i<controlPoints.Length-1; i++)
 			{
 				var left = controlPoints[i];
@@ -58,7 +60,7 @@ namespace Shaper
 			var d2 = Abs(((x2 - x4) * dy - (y2 - y4) * dx));
 			var d3 = Abs(((x3 - x4) * dy - (y3 - y4) * dx));
 
-			if((d2 + d3)*(d2 + d3) < 1.0f * (dx*dx + dy*dy))
+			if((d2 + d3)*(d2 + d3) < 0.01f * (dx*dx + dy*dy))
 			{
 				AddPoint(x1234, y1234);
 				return;
@@ -74,4 +76,3 @@ namespace Shaper
 		}
 	}
 }
-	

@@ -15,14 +15,14 @@ namespace Shaper
 		{
 			return new PolygonTriangulation(vertices).CreateTriangles();
 		}
-		
+
 		readonly float2[] _vertices;
 		readonly List<ushort> V;
 
 		PolygonTriangulation(IEnumerable<float2> vertices)
 		{
 			_vertices = ToArray(vertices);
-			
+
 			var n = _vertices.Length; // TODO: has count
 			if (n < 3)
 				throw new Exception("contour must include at least 3 vertices");
@@ -36,11 +36,11 @@ namespace Shaper
 				for (ushort v=0; v<n; v++)
 					V.Add((ushort)((n-1)-v));
 		}
-		
+
 		IEnumerable<ushort> CreateTriangles()
 		{
 			var result = new List<ushort>();
-			
+
 			// remove nv-2 Vertices, creating 1 triangle every time
 			int count = 2*V.Count; // error detection
 

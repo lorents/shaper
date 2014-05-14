@@ -1,0 +1,16 @@
+<Layouts>
+  <ViewportLayout Name="CustomLayout1">
+    <Window>
+      <FillViewport />
+    </Window>
+  </ViewportLayout>
+  <Node RefId="this" PanX="96" PanY="-5" Default="this.Children">
+    <Node RefId="Path2" X="254" Y="-21.6150997089351" />
+    <Node RefId="Path1" X="402" Y="120.384900291065">
+      <Node RefId="BasicEnterLeaveTransition1" />
+    </Node>
+    <Node RefId="TextBlock1" X="239" Y="36.3849002910649" />
+    <Node RefId="Path4" X="472" Y="60.3849002910649" />
+    <Node RefId="Path3" X="251" Y="-82.6150997089351" PanX="100" PanY="100" />
+  </Node>
+</Layouts>

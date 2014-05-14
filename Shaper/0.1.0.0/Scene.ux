@@ -1,0 +1,7 @@
+<Scene xmlns:ux="http://schemas.outracks.com/ux" ux:ClassName="TestScene" xmlns="Uno.Scenes, Uno.Styling, Uno.UI, Uno">
+  <Entity ux:Binding="Camera" ux:Field="Camera1">
+    <Transform Position="100, 100, 100" RotationDegrees="325, 45, 120" />
+    <Frustum FovDegrees="45" Aspect="2.4" ZNear="10" ZFar="5000" />
+  </Entity>
+  <Style ux:Name="Style1" ux:StaticRef="Uno.UI.DefaultStyle.Style" />
+</Scene>

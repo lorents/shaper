@@ -8,7 +8,7 @@ namespace Shaper
 		public float2 TangentRight;
 		public float2 TangentLeft;
 	}
-		
+
 	public class Polygon
 	{
 		public IEnumerable<ConvexPolygon> ToConvexPolygons()

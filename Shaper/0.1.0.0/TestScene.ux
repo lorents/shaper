@@ -1,0 +1,22 @@
+<Scene xmlns:ux="http://schemas.outracks.com/ux" xmlns:s="Shaper" ux:ClassName="TestScene" xmlns="Uno.Scenes, Uno.Styling, Uno.UI, Uno">
+  <s:Path Data="M 341 104 C 340 171 206 140 150 91 C 94 42 52 209 126 231 C 200 253 274 152 369 242 C 464 332 536 117 478 36 " X="-51" Y="116" Width="549" Height="382" HorizontalAlignment="Left" VerticalAlignment="Top" Color="1, 0.6980392, 0, 1" ux:Name="Path3">
+    <BasicEnterLeaveTransition ux:Binding="EnterTransition" Scale="1, 0" ScaleEasing="ElasticOut" Opacity="1" Duration="1" Delay="0.4" DelayByIndex="true" ux:Name="BasicEnterLeaveTransition1" />
+  </s:Path>
+  <TextBlock Text="SHAPES" Height="193" FontSize="231" ux:Name="TextBlock1">
+    <Font ux:Binding="Font" ux:Name="uxid0" ux:StaticRef="Uno.UI.DefaultStyle.SemiBoldText" />
+    <Font ux:AutoBind="false" ux:Name="Font1" />
+  </TextBlock>
+  <s:Path Data="M 477.5 148.5 C 486.5 75.5 221 33 248 85 C 275 137 119 160 198 263 C 277 366 415.5 178.5 470.5 250.5 C 525.5 322.5 518.5 137.5 493.5 166.5 " X="37" Y="167" Width="527" Height="8131" Color="0.6, 1, 0, 0.3529412" ux:Name="Path2">
+    <BasicEnterLeaveTransition ux:Binding="EnterTransition" ux:Ref="BasicEnterLeaveTransition1" />
+  </s:Path>
+  <s:Path Data="M 155 37 C 155 36 136 -127 77 -78 C 18 -29 91 -1 106 67 C 121 135 11 67 20 115 C 29 163 66 277 110 253 " LocalZoom="1" X="482" Y="106" Width="229" Height="315" Color="1, 0.5803922, 0, 1" ux:Name="Path1">
+    <BasicEnterLeaveTransition ux:Binding="EnterTransition" ux:Ref="BasicEnterLeaveTransition1" />
+  </s:Path>
+  <s:Path Data="M 592 83 C 592 83 531 137 531 137 C 531 137 671 146 671 146 C 671 146 651 102 651 102 C 651 102 632 84 632 84 " ux:Name="Path5" />
+  <s:Path Data="M 611 119 " ux:Name="Path6" />
+  <s:Path Data="M 185 66 C 185 66 155 130 155 130 C 155 130 247 191 294 158 C 341 125 304 41 285 86 C 266 131 203 12 199 55 C 195 98 175 51 175 51 C 175 51 162 56 162 56 C 162 56 158 63 158 63 C 158 63 160 74 160 74 C 160 74 174 77 174 77 C 174 77 181 79 181 79 C 181 79 173 89 173 89 C 173 89 169 92 169 92 C 169 92 168 97 168 97 C 168 97 146 96 146 96 C 146 96 155 105 155 105 C 155 105 176 120 176 120 C 176 120 187 110 187 110 C 187 110 191 97 191 97 C 191 97 201 98 201 98 C 201 98 201 117 201 117 C 201 117 193 125 193 125 C 193 125 186 131 186 131 C 186 131 174 134 174 134 C 174 134 158 132 158 132 C 158 132 171 107 171 107 C 171 107 166 97 166 97 C 166 97 159 76 159 76 " ux:Name="Path7" />
+  <s:Path Data="M 837 348 C 842 351 829 356 776 352 C 723 348 647 432 648 446 C 649 460 773 492 783 495 C 793 498 855 528 869 487 C 883 446 775 354 775 354 C 775 354 942 524 942 524 C 942 524 953 437 953 437 C 953 437 933 317 869 315 " ux:Name="Path12" />
+  <s:Path Data="M 196 426 C 227 400 273 479 328 431 C 383 383 341 494 333 506 C 325 518 222 537 208 532 C 194 527 136 491 134 479 " ux:Name="Path13" />
+  <Style ux:Name="Style1" ux:StaticRef="Uno.UI.DefaultStyle.Style" />
+  <s:Path ux:AutoBind="false" ux:Name="Path4" />
+</Scene>

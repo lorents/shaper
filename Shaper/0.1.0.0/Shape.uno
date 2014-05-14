@@ -6,22 +6,22 @@ namespace Shaper
 	public class Tweener
 	{
 		readonly double _time;
-		
-		public Tweener(double time) 
-		{ 
-			_time = time; 
+
+		public Tweener(double time)
+		{
+			_time = time;
 		}
-		
+
 		public float Sin(float Frequency = 1.0f, float Phase = 0.0f) { return (float)Math.Sin(_time * Frequency + Phase); }
 		public float Cos(float Frequency = 1.0f, float Phase = 0.0f) { return (float)Math.Cos(_time * Frequency + Phase); }
 
-		public float2 EaseIn(float2 From, float2 To, double At=0.0, double Duration=0.2, float Amount = 1.0f) 
+		public float2 EaseIn(float2 From, float2 To, double At=0.0, double Duration=0.2, float Amount = 1.0f)
 		{
 			return From + (To - From) * (float)Math.Saturate((_time - At) / Duration);
 		}
-		
-		public float2 EaseOut(float2 From, float2 To, double At=0.0, double Duration=0.2, float Amount = 1.0f) 
-		{ 
+
+		public float2 EaseOut(float2 From, float2 To, double At=0.0, double Duration=0.2, float Amount = 1.0f)
+		{
 			return From + (To - From) * (float)Math.Saturate((_time - At) / Duration);
 		}
 	}
@@ -32,12 +32,12 @@ namespace Shaper
 	{
 		public float2 Position { get; private set; }
 		public Func<Tweener, float2> EvalPosition { get; private set; }
-		
+
 		public float2 Scaling { get; private set; }
 		public Func<Tweener, float2> EvalScaling { get; private set; }
 
 		public double TimeOffset { get; private set; }
-		
+
 		protected Shape(
 			double TimeOffset = 0,
 			float2 Position = float2(0), Func<Tweener, float2> EvalPosition = null,
@@ -49,7 +49,7 @@ namespace Shaper
 			this.Scaling = Scale;
 			this.EvalScaling = EvalScale;
 		}
-		
+
 		// Animate
 
 		//public Shape Animate(Func<Tweener, float2> Position = null)
@@ -73,7 +73,7 @@ namespace Shaper
 		{
 			return what.Union(with);
 		}
-		
+
 		public Shape Intersect(Shape With)
 		{
 			return new Intersect(this, With);

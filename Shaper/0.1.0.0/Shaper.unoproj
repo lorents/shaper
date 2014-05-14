@@ -2,9 +2,16 @@
 <Project>
   <References>
     <PackageReference Name="Uno.Content.Utilities" />
+    <PackageReference Name="Uno.Designer" />
+    <PackageReference Name="Uno.Designer.Interop" />
+    <PackageReference Name="Uno.Geometry" Version="0.1.0.0" />
     <PackageReference Name="Uno.Scenes" />
+    <PackageReference Name="Uno.Styling" />
+    <PackageReference Name="Uno.Tweening" Version="0.1.0.0" />
+    <PackageReference Name="Uno.UI" />
   </References>
   <Files>
+    <UxFile Path="TestScene.ux" />
     <SourceFile Path="Operators/Intersect.uno" />
     <SourceFile Path="Operators/Inverse.uno" />
     <SourceFile Path="Operators/Subtract.uno" />
@@ -13,10 +20,16 @@
     <SourceFile Path="Shapes/Circle.uno" />
     <SourceFile Path="App.uno" />
     <SourceFile Path="ConvexPolygon.uno" />
+    <SourceFile Path="Path.uno" />
+    <SourceFile Path="PathDeserializer.uno" />
+    <SourceFile Path="PathGizmo.uno" />
+    <SourceFile Path="PathSerializer.uno" />
     <SourceFile Path="Polygon.uno" />
     <SourceFile Path="Shape.uno" />
     <SourceFile Path="Subdivision.uno" />
+    <SourceFile Path="TestScene.ux.uno" />
     <SourceFile Path="TriangleMesh.uno" />
     <SourceFile Path="Triangulation.uno" />
+    <StartupFile Path="TestScene.ux" />
   </Files>
 </Project>
